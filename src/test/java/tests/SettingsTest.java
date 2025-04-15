@@ -1,4 +1,4 @@
 package tests;
 
-public class SettingsTest {
+public class SettingsTest extends BaseTest {
 }

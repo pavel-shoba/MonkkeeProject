@@ -1,4 +1,4 @@
 package steps;
 
-public class TagsSteps {
+public class TagsSteps extends BaseSteps {
 }

@@ -1,4 +1,4 @@
 package tests;
 
-public class TagsTest {
+public class TagsTest extends BaseTest{
 }
