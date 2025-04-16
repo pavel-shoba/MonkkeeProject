@@ -1,11 +1,13 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
+import listener.TestListener;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import pages.EntirePage;
 import pages.LoginPage;
 import pages.PreviewPage;
@@ -20,6 +22,7 @@ import java.util.Map;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 
+@Listeners(TestListener.class)
 public class BaseTest {
     protected PreviewPage previewPage;
     protected LoginPage loginPage;
@@ -31,6 +34,9 @@ public class BaseTest {
     public static String PASSWORD = PropertyReader.getProperty("password");
     public static String ERROR_EMPTY_FIELDS = "Mandatory field";
     public static String ERROR_LOGIN_FAILED = "Login failed";
+    public static String ENTRY_DESCRIPTION = "My first entry";
+    public static String NEW_DESCRIPTION = "My second entry";
+    public static String NEW_TAG = "#daily";
 
     public void initPages() {
         previewPage = new PreviewPage();

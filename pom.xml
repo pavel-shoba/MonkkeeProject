@@ -36,6 +36,10 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
+                    <includes>
+                        <include>**/LoginTest.java</include>
+                        <include>**/*Test.java</include>
+                    </includes>
                     <argLine>
                         -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/1.9.22/aspectjweaver-1.9.22.jar
                         -Xmx256m
