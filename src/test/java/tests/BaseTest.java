@@ -8,12 +8,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
-import pages.EntirePage;
-import pages.LoginPage;
-import pages.PreviewPage;
-import steps.EntireSteps;
-import steps.LoginSteps;
-import steps.PreviewSteps;
+import pages.*;
+import steps.*;
 import utils.PropertyReader;
 
 import java.util.HashMap;
@@ -28,23 +24,32 @@ public class BaseTest {
     protected LoginPage loginPage;
     protected PreviewSteps previewSteps;
     protected LoginSteps loginSteps;
-    protected EntirePage entirePage;
-    protected EntireSteps entireSteps;
+    protected EntryPage entryPage;
+    protected EntrySteps entrySteps;
+    protected SettingsPage settingsPage;
+    protected SettingsSteps settingsSteps;
+    protected TagsPage tagsPage;
+    protected TagsSteps tagsSteps;
     public static String USER = PropertyReader.getProperty("user");
     public static String PASSWORD = PropertyReader.getProperty("password");
     public static String ERROR_EMPTY_FIELDS = "Mandatory field";
     public static String ERROR_LOGIN_FAILED = "Login failed";
     public static String ENTRY_DESCRIPTION = "My first entry";
     public static String NEW_DESCRIPTION = "My second entry";
-    public static String NEW_TAG = "#daily";
+    public static String TAG = "#daily";
+    public static String NEW_TAG = "#summer";
 
     public void initPages() {
         previewPage = new PreviewPage();
         previewSteps = new PreviewSteps();
         loginPage = new LoginPage();
         loginSteps = new LoginSteps();
-        entirePage = new EntirePage();
-        entireSteps = new EntireSteps();
+        entryPage = new EntryPage();
+        entrySteps = new EntrySteps();
+        settingsPage = new SettingsPage();
+        settingsSteps = new SettingsSteps();
+        tagsPage = new TagsPage();
+        tagsSteps = new TagsSteps();
     }
 
     @BeforeMethod

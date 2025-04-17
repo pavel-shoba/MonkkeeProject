@@ -21,16 +21,32 @@ public class PreviewPage extends BasePage {
             "menu4", PRICES_BUTTON
     );
 
+    /**
+     * Method to open Preview page
+     *
+     * @param url
+     * @return preview page
+     */
     public PreviewPage openPreviewPage(String url) {
         open(url);
         return this;
     }
 
+    /**
+     * Method to check that Preview is opened
+     *
+     * @return preview page
+     */
     public PreviewPage isOpened() {
         HEADER_MENU.shouldBe(Condition.visible);
         return this;
     }
 
+    /**
+     * Method to get text of buttons
+     *
+     * @return text
+     */
     public String getTextButtons(String name) {
         return MENU_BUTTONS.get(name.toLowerCase()).getText();
     }

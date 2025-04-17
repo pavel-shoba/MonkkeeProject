@@ -11,7 +11,7 @@ public class LoginTest extends BaseTest {
     @Test(description = "QA-2 Login with valid data")
     public void successLoginTest() {
         loginSteps.login(USER, PASSWORD, IConstants.LOGIN_PAGE_URL);
-        Assert.assertTrue(entirePage.userMenuIsVisible(), "User menu is not visible");
+        Assert.assertTrue(entryPage.userMenuIsVisible(), "User menu is not visible");
     }
 
     @Test(description = "QA-3 Login with empty fields")

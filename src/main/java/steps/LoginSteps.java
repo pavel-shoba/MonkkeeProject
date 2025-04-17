@@ -2,17 +2,17 @@ package steps;
 
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
-import pages.EntirePage;
+import pages.EntryPage;
 import pages.LoginPage;
 
 @Log4j2
 public class LoginSteps extends BaseSteps {
     LoginPage loginPage;
-    EntirePage entirePage;
+    EntryPage entryPage;
 
     public LoginSteps() {
         this.loginPage = new LoginPage();
-        this.entirePage = new EntirePage();
+        this.entryPage = new EntryPage();
     }
 
     @Step("Login with creds")
@@ -29,6 +29,6 @@ public class LoginSteps extends BaseSteps {
                 .openLoginPage(url)
                 .login(user, password)
                 .isOpened();
-        entirePage.logout();
+        entryPage.logout();
     }
 }
