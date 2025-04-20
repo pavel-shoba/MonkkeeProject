@@ -95,4 +95,16 @@ public class TagsPage extends BasePage {
             return true;
         }
     }
+
+    /**
+     * Method to help delete all previous tags before test
+     */
+    public void deleteAllPreviousTags() {
+        if(TAG_ON_PAGE.isDisplayed()) {
+            while ($(TAG_ON_PAGE).isDisplayed()) {
+                new Button().click(DELETE_TAG_BUTTON);
+                confirm();
+            }
+        }
+    }
 }

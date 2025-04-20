@@ -22,6 +22,7 @@ public class EntryPage extends BasePage {
     public static final ElementsCollection DESCRIPTION_OF_CREATED_ENTRY = $$("[class=' entries__body']");
     public static final SelenideElement SUBMIT_TAG_BUTTON = $("[id='assign-new-tag']");
     public static final SelenideElement TAG_OF_CREATED_ENTRY = $x("//*[@class='entries__tags']/span");
+    public static final SelenideElement CHECK_BOX_SELECT_ALL = $x("//*[contains(@title,'Select all')]");
     public static final ElementsCollection CHECKBOX_CREATED_ENTITY = $$x("//*[@class='entries__checkbox-datetime-wrapper']/div[1]/input");
     public static final SelenideElement DELETE_BUTTON = $("[id='delete-entries']");
     public static final SelenideElement SEARCH_ENTRY = $x("//*[@title='Search']");
@@ -34,6 +35,11 @@ public class EntryPage extends BasePage {
      */
     public EntryPage isOpened() {
         USER_MENU.shouldBe(Condition.visible);
+        return this;
+    }
+
+    public EntryPage openEntryPage(String url) {
+        open(url);
         return this;
     }
 
@@ -144,6 +150,12 @@ public class EntryPage extends BasePage {
      * @return EntryPage
      */
     public EntryPage createAndDeleteEntry(String description) {
+        if(DESCRIPTION_OF_CREATED_ENTRY.get(0).isDisplayed()) {
+            wait.until(ExpectedConditions.elementToBeSelected(CHECK_BOX_SELECT_ALL));
+            new Button().click(CHECK_BOX_SELECT_ALL);
+            new Button().click(DELETE_BUTTON);
+            confirm();
+        }
         new Button().click(CREATE_ENTRY_BUTTON);
         wait.until(ExpectedConditions.visibilityOf(BACK_TO_OVERVIEW_BUTTON));
         new Input("editable").writeEntryFields(description);
@@ -151,6 +163,7 @@ public class EntryPage extends BasePage {
         new Button().clickFirstElement(CHECKBOX_CREATED_ENTITY);
         new Button().click(DELETE_BUTTON);
         confirm();
+        wait.until(ExpectedConditions.invisibilityOf(DESCRIPTION_OF_CREATED_ENTRY.get(0)));
         return this;
     }
 
