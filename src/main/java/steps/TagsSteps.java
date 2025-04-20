@@ -25,4 +25,14 @@ public class TagsSteps extends BaseSteps {
                 .openTagsPage()
                 .deleteTag();
     }
+
+    @Step("Check that tag is not visible on the page")
+    public boolean isTagNotVisible() {
+        return tagsPage.tagIsNotVisible();
+    }
+
+    @Step("Get the updated tag name from the page")
+    public String getUpdatedTagName() {
+        return tagsPage.getNewTagName();
+    }
 }

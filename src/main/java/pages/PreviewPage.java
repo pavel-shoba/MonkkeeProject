@@ -3,7 +3,6 @@ package pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.extern.log4j.Log4j2;
-
 import java.util.Map;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -48,6 +47,13 @@ public class PreviewPage extends BasePage {
      * @return text
      */
     public String getTextButtons(String name) {
-        return MENU_BUTTONS.get(name.toLowerCase()).getText();
+        try {
+            String text = MENU_BUTTONS.get(name.toLowerCase()).getText();
+            log.info("Text of button '{}': {}", name, text);
+            return text;
+        } catch (NullPointerException e) {
+            log.error("Button with name '{}' not found", name, e);
+            return null;
+        }
     }
 }

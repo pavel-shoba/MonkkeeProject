@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import elements.Button;
 import lombok.extern.log4j.Log4j2;
+import java.util.NoSuchElementException;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -35,7 +36,14 @@ public class SettingsPage extends BasePage {
      * @return true/false
      */
     public Boolean settingsMenuIsDisplayed() {
-        return SETTINGS_MENU.isDisplayed();
+        try {
+            boolean displayed = SETTINGS_MENU.isDisplayed();
+            log.info("Settings menu is displayed: {}", displayed);
+            return displayed;
+        } catch (NoSuchElementException | NullPointerException e) {
+            log.info("Settings menu element is not found");
+            return false;
+        }
     }
 
     /**

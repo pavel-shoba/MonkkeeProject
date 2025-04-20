@@ -69,7 +69,14 @@ public class LoginPage extends BasePage {
      * @return text
      */
     public String getErrorEmptyUser() {
-        return ERROR_USER_MESSAGE.getText();
+        try {
+            String text = ERROR_USER_MESSAGE.getText();
+            log.info("Error message for empty user: {}", text);
+            return text;
+        } catch (NullPointerException e) {
+            log.info("Error message text about empty user not found", e);
+            return null;
+        }
     }
 
     /**
@@ -78,7 +85,14 @@ public class LoginPage extends BasePage {
      * @return text
      */
     public String getErrorEmptyPassword() {
-        return ERROR_PASSWORD_MESSAGE.getText();
+        try {
+            String text = ERROR_PASSWORD_MESSAGE.getText();
+            log.info("Error message for empty password: {}", text);
+            return text;
+        } catch (NullPointerException e) {
+            log.info("Error message text about empty password not found", e);
+            return null;
+        }
     }
 
     /**
@@ -87,7 +101,14 @@ public class LoginPage extends BasePage {
      * @return text
      */
     public String getAlertLoginFailed() {
-        return LOGIN_FAILED_MESSAGE.getText();
+        try {
+            String text = LOGIN_FAILED_MESSAGE.getText();
+            log.info("Login failed alert text: {}", text);
+            return text;
+        } catch (NullPointerException e) {
+            log.info("Login failed text not found", e);
+            return null;
+        }
     }
 
     /**
@@ -96,7 +117,14 @@ public class LoginPage extends BasePage {
      * @return true/false
      */
     public Boolean loginHeadingIsVisible() {
-        LOGIN_HEADING.shouldBe(Condition.visible);
-        return LOGIN_HEADING.isDisplayed();
+        try {
+            LOGIN_HEADING.shouldBe(Condition.visible);
+            boolean visible = LOGIN_HEADING.isDisplayed();
+            log.info("Login heading is visible: {}", visible);
+            return visible;
+        } catch (Exception e) {
+            log.info("Login heading is not visible", e);
+            return false;
+        }
     }
 }

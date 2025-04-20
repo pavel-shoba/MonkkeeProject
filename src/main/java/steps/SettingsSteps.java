@@ -24,4 +24,9 @@ public class SettingsSteps extends BaseSteps {
                 .openSettings()
                 .isOpened();
     }
+
+    @Step("Check if settings menu is displayed")
+    public boolean isSettingsMenuDisplayed() {
+        return settingsPage.settingsMenuIsDisplayed();
+    }
 }

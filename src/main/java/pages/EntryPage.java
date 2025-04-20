@@ -8,6 +8,7 @@ import elements.Input;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -49,7 +50,14 @@ public class EntryPage extends BasePage {
      * @return true/false
      */
     public Boolean userMenuIsVisible() {
-        return USER_MENU.isDisplayed();
+        try {
+            boolean visible = USER_MENU.isDisplayed();
+            log.info("User menu is visible: {}", visible);
+            return visible;
+        } catch (NoSuchElementException | NullPointerException e) {
+            log.info("User menu element is not found", e);
+            return false;
+        }
     }
 
     /**
@@ -87,14 +95,28 @@ public class EntryPage extends BasePage {
      * Method to get description of entry
      */
     public String getEntryDescription() {
-        return DESCRIPTION_OF_CREATED_ENTRY.get(0).getText();
+        try {
+            String text = DESCRIPTION_OF_CREATED_ENTRY.get(0).getText();
+            log.info("Entry description found: {}", text);
+            return text;
+        } catch (IndexOutOfBoundsException | NullPointerException e) {
+            log.error("Description of entry not found", e);
+            return null;
+        }
     }
 
     /**
      * Method to get tag of entry
      */
     public String getEntryTag() {
-        return TAG_OF_CREATED_ENTRY.getText();
+        try {
+            String tag = TAG_OF_CREATED_ENTRY.getText();
+            log.info("Entry tag found: {}", tag);
+            return tag;
+        } catch (NullPointerException e) {
+            log.error("Entry tag not found", e);
+            return null;
+        }
     }
 
     /**

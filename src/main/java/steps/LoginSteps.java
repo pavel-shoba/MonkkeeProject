@@ -31,4 +31,24 @@ public class LoginSteps extends BaseSteps {
                 .isOpened();
         entryPage.logout();
     }
+
+    @Step("Check if login heading is visible")
+    public boolean isLoginHeadingVisible() {
+        return loginPage.loginHeadingIsVisible();
+    }
+
+    @Step("Get login failed alert text")
+    public String getLoginFailedAlertText() {
+        return loginPage.getAlertLoginFailed();
+    }
+
+    @Step("Get error message for empty user field")
+    public String getEmptyUserErrorMessage() {
+        return loginPage.getErrorEmptyUser();
+    }
+
+    @Step("Get error message for empty password field")
+    public String getEmptyPasswordErrorMessage() {
+        return loginPage.getErrorEmptyPassword();
+    }
 }

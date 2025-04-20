@@ -6,6 +6,7 @@ import elements.Button;
 import elements.Input;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import java.util.NoSuchElementException;
 import static com.codeborne.selenide.Selenide.*;
 
 @Log4j2
@@ -62,7 +63,14 @@ public class TagsPage extends BasePage {
      * @return text
      */
     public String getNewTagName() {
-        return TAG_ON_PAGE.getText();
+        try {
+            String tagName = TAG_ON_PAGE.getText();
+            log.info("New tag name found: {}", tagName);
+            return tagName;
+        } catch (NullPointerException e) {
+            log.error("Text for tag not found on page", e);
+            return null;
+        }
     }
 
     /**
@@ -79,6 +87,12 @@ public class TagsPage extends BasePage {
      * @return true/false
      */
     public Boolean tagIsNotVisible() {
-        return !TAG_ON_PAGE.isDisplayed();
+        try {
+            log.info("Tag on page is displayed: {}", TAG_ON_PAGE.isDisplayed());
+            return !TAG_ON_PAGE.isDisplayed();
+        } catch (NoSuchElementException | NullPointerException e) {
+            log.info("Tag on page element is not found", e);
+            return true;
+        }
     }
 }

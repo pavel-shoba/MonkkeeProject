@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import pages.EntryPage;
 import pages.LoginPage;
+import java.util.List;
 
 @Log4j2
 public class EntrySteps extends BaseSteps {
@@ -38,5 +39,25 @@ public class EntrySteps extends BaseSteps {
     @Step("Create entry and search")
     public void createAndSearchEntry(String description) {
         entryPage.createEntryAndSearch(description);
+    }
+
+    @Step("Check if user menu is visible after login")
+    public boolean isUserMenuVisible() {
+        return entryPage.userMenuIsVisible();
+    }
+
+    @Step("Get description of created entry")
+    public String getEntryDescription() {
+        return entryPage.getEntryDescription();
+    }
+
+    @Step("Get tag name of created entry")
+    public String getEntryTag() {
+        return entryPage.getEntryTag();
+    }
+
+    @Step("Get list of footer texts")
+    public List<String> getFooterTexts() {
+        return entryPage.getFooterTexts();
     }
 }

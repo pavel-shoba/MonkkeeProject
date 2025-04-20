@@ -11,7 +11,7 @@ public class TagsTest extends BaseTest {
         loginSteps.login(USER, PASSWORD, IConstants.LOGIN_PAGE_URL);
         entrySteps.createEntryWithDescriptionAndTag(ENTRY_DESCRIPTION, TAG);
         tagsSteps.changeTagName(NEW_TAG);
-        Assert.assertEquals(tagsPage.getNewTagName(), NEW_TAG);
+        Assert.assertEquals(tagsSteps.getUpdatedTagName(), NEW_TAG);
     }
 
     @Test(description = "QA-14 Deleting of created tag")
@@ -19,6 +19,6 @@ public class TagsTest extends BaseTest {
         loginSteps.login(USER, PASSWORD, IConstants.LOGIN_PAGE_URL);
         entrySteps.createEntryWithDescriptionAndTag(ENTRY_DESCRIPTION, TAG);
         tagsSteps.deleteTag();
-        Assert.assertFalse(tagsPage.tagIsNotVisible(), "Tag is still visible");
+        Assert.assertTrue(tagsSteps.isTagNotVisible(), "Tag is still visible");
     }
 }

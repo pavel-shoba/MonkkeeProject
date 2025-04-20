@@ -19,4 +19,9 @@ public class PreviewSteps extends BaseSteps {
                 .openPreviewPage(url)
                 .isOpened();
     }
+
+    @Step("Get text of menu button by key: {name}")
+    public String getMenuButtonText(String name) {
+        return previewPage.getTextButtons(name);
+    }
 }

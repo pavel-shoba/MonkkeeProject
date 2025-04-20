@@ -2,6 +2,7 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import listener.TestListener;
+import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,10 +12,8 @@ import org.testng.annotations.Listeners;
 import pages.*;
 import steps.*;
 import utils.PropertyReader;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 
@@ -38,6 +37,7 @@ public class BaseTest {
     public static String NEW_DESCRIPTION = "My second entry";
     public static String TAG = "#daily";
     public static String NEW_TAG = "#summer";
+    SoftAssertions softly = new SoftAssertions();
 
     public void initPages() {
         previewPage = new PreviewPage();
