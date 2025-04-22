@@ -19,7 +19,7 @@ pipeline {
             git branch: "${params.BRANCH}", url: 'https://github.com/pavel-shoba/MonkkeeProject.git'
 
             // Run Maven on a Unix agent.
-            sh "mvn clean -Dtest=LoginTest test"
+            sh "mvn clean -Dtest=LoginTest -Dselenide.headless=true test"
 
          }
 
