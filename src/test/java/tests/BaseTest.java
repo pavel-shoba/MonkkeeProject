@@ -56,6 +56,12 @@ public class BaseTest {
     public void initTest() {
         ChromeOptions options = new ChromeOptions();
         Map<String, Object> prefs = new HashMap<>();
+        if (Configuration.headless) {
+            options.addArguments("--headless=new");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+        }
         options.addArguments("--disable-popup-blocking");
         prefs.put("profile.default_content_setting_values.notifications", 2);
         options.setExperimentalOption("prefs", prefs);
