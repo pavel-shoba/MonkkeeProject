@@ -63,7 +63,6 @@ public class BaseTest {
         setWebDriver(driver);
         Configuration.browser = "chrome";
         Configuration.timeout = 15000;
-        Configuration.headless  = false;
         Configuration.browserSize = "1024x768";
         initPages();
     }
