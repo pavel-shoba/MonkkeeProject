@@ -1,10 +1,13 @@
 package steps;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import pages.EntryPage;
 import pages.LoginPage;
 import java.util.List;
+import static pages.EntryPage.DESCRIPTION_OF_CREATED_ENTRY;
 
 @Log4j2
 public class EntrySteps extends BaseSteps {
@@ -59,5 +62,15 @@ public class EntrySteps extends BaseSteps {
     @Step("Get list of footer texts")
     public List<String> getFooterTexts() {
         return entryPage.getFooterTexts();
+    }
+
+    @Step("Get the created entry that should be visible")
+    public SelenideElement getVisibleCreatedEntry() {
+        return DESCRIPTION_OF_CREATED_ENTRY.first().shouldBe(Condition.visible);
+    }
+
+    @Step("Check if the created entry is displayed")
+    public boolean isCreatedEntryDisplayed() {
+        return DESCRIPTION_OF_CREATED_ENTRY.first().isDisplayed();
     }
 }

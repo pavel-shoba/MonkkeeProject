@@ -1,10 +1,8 @@
 package tests;
 
-import com.codeborne.selenide.Condition;
 import constants.IConstants;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import static pages.EntryPage.DESCRIPTION_OF_CREATED_ENTRY;
 
 public class EntryTest extends BaseTest {
 
@@ -12,7 +10,9 @@ public class EntryTest extends BaseTest {
     public void createEntryTest() {
         loginSteps.login(USER, PASSWORD, IConstants.LOGIN_PAGE_URL);
         entrySteps.createEntryWithDescription(ENTRY_DESCRIPTION);
-        softly.assertThat(DESCRIPTION_OF_CREATED_ENTRY.first().shouldBe(Condition.visible).exists());
+        softly.assertThat(entrySteps.getVisibleCreatedEntry().exists())
+                .as("Check that the created entry exists and is visible")
+                .isTrue();
         softly.assertThat(entrySteps.getEntryDescription()).isEqualTo(ENTRY_DESCRIPTION);
         softly.assertAll();
     }
@@ -21,7 +21,9 @@ public class EntryTest extends BaseTest {
     public void createEntryWithTagTest() {
         loginSteps.login(USER, PASSWORD, IConstants.LOGIN_PAGE_URL);
         entrySteps.createEntryWithDescriptionAndTag(ENTRY_DESCRIPTION, TAG);
-        softly.assertThat(DESCRIPTION_OF_CREATED_ENTRY.first().shouldBe(Condition.visible).exists());
+        softly.assertThat(entrySteps.getVisibleCreatedEntry().exists())
+                .as("Check that the created entry exists and is visible")
+                .isTrue();
         softly.assertThat(entrySteps.getEntryTag()).isEqualTo(TAG);
         softly.assertAll();
     }
@@ -37,14 +39,19 @@ public class EntryTest extends BaseTest {
     public void createEntryAndDeleteTest() {
         loginSteps.login(USER, PASSWORD, IConstants.LOGIN_PAGE_URL);
         entrySteps.createAndDeleteEntry(ENTRY_DESCRIPTION);
-        Assert.assertFalse(DESCRIPTION_OF_CREATED_ENTRY.first().isDisplayed());
+        Assert.assertFalse(
+                entrySteps.isCreatedEntryDisplayed(),
+                "Expected the created entry to be hidden, but it is visible"
+        );
     }
 
     @Test(description = "QA-11 Create entry and search" )
     public void createEntryAndSearchTest() {
         loginSteps.login(USER, PASSWORD, IConstants.LOGIN_PAGE_URL);
         entrySteps.createAndSearchEntry(ENTRY_DESCRIPTION);
-        Assert.assertTrue(DESCRIPTION_OF_CREATED_ENTRY.first().shouldBe(Condition.visible).exists());
+        softly.assertThat(entrySteps.getVisibleCreatedEntry().exists())
+                .as("Check that the created entry exists and is visible")
+                .isTrue();
     }
 
     @Test(description = "QA-15 Check elements of footer")

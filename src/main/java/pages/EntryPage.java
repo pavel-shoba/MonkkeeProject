@@ -151,8 +151,8 @@ public class EntryPage extends BasePage {
      */
     public EntryPage createAndDeleteEntry(String description) {
         if(DESCRIPTION_OF_CREATED_ENTRY.get(0).isDisplayed()) {
-            wait.until(ExpectedConditions.elementToBeSelected(CHECK_BOX_SELECT_ALL));
             new Button().click(CHECK_BOX_SELECT_ALL);
+            wait.until(ExpectedConditions.elementToBeSelected(CHECK_BOX_SELECT_ALL));
             new Button().click(DELETE_BUTTON);
             confirm();
         }
